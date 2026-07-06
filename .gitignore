@@ -1,0 +1,17 @@
+# Machine-specific tool config
+.claude/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node (not needed — the site is self-contained static)
+node_modules/
+
+# Temporary debug screenshots
+errorfix.*.png
+
+# Editor
+.vscode/
+.idea/
