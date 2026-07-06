@@ -381,8 +381,9 @@
     function planetParams(t) {
       return {
         cx: isMobile ? vw * 0.5 : vw * 0.66,
-        /* mobile: larger, its top tucked under the header, bottom just above the copy */
-        cy: isMobile ? vh * 0.23 : vh * 0.55,
+        /* mobile: its TOP edge starts below the header bottom (hard limit) — center
+           is pinned to radius + header clearance so the planet never sits under the header */
+        cy: isMobile ? (Math.min(vw * 0.52, vh * 0.245) + 92) : vh * 0.55,
         R: isMobile ? Math.min(vw * 0.52, vh * 0.245) : Math.min(vw * 0.30, vh * 0.47),
         rot: t * 0.1025 /* hero planet spin */
       };
