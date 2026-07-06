@@ -381,8 +381,9 @@
     function planetParams(t) {
       return {
         cx: isMobile ? vw * 0.5 : vw * 0.66,
-        cy: isMobile ? vh * 0.28 : vh * 0.55,
-        R: isMobile ? Math.min(vw * 0.44, vh * 0.225) : Math.min(vw * 0.30, vh * 0.47),
+        /* mobile: larger, its top tucked under the header, bottom just above the copy */
+        cy: isMobile ? vh * 0.23 : vh * 0.55,
+        R: isMobile ? Math.min(vw * 0.52, vh * 0.245) : Math.min(vw * 0.30, vh * 0.47),
         rot: t * 0.1025 /* hero planet spin */
       };
     }

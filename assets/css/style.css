@@ -949,7 +949,8 @@ html.js .reveal-line.is-visible > span { transform: none; }
   .hero__title { font-size: 31px; line-height: 1.12; }
   .hero__sub { font-size: 15px; max-width: 100%; }
   .narrative p.lead { font-size: 17px; }
-  .proof-item__label { font-size: 14px; }
+  .proof-item__value { font-size: 26px; }
+  .proof-item__label { font-size: 16px; }
   .brand-card__logo img { height: 130px; }
 
   .nav__inner { height: 72px; }
@@ -963,9 +964,10 @@ html.js .reveal-line.is-visible > span { transform: none; }
   .hero__ctas .btn { width: 100%; }
   .hero__ctas .btn-ghost { width: 100%; justify-content: center; }
 
-  /* flex-basis 240px becomes min-HEIGHT in column direction — reset it */
-  .proof-strip { flex-direction: column; gap: 24px; padding-block: 20px; }
-  .proof-item { flex: 0 0 auto; max-width: none; padding-top: 16px; }
+  /* flex-basis 240px becomes min-HEIGHT in column direction — reset it.
+     Doubled vertical spacing between the three stats for more presence. */
+  .proof-strip { flex-direction: column; gap: 48px; padding-block: 24px; }
+  .proof-item { flex: 0 0 auto; max-width: none; padding-top: 24px; }
   .cosmos-gap { height: 10vh; }
   .cosmos-gap--short { height: 6vh; }
   .footer__grid { flex-direction: column; }
