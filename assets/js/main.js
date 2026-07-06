@@ -633,18 +633,40 @@
     }
 
     /* --- render loop --- */
+    var cvh = 0;                       /* canvas drawing height (stable) */
+    var lastW = 0, lastH = 0, resizeT = 0;
+
     function resize() {
       vw = window.innerWidth;
       vh = window.innerHeight;
       isMobile = vw < 1024;
+      /* pad the backing store so it stays covered when the mobile URL bar
+         hides and grows the viewport — avoids any visible canvas resize */
+      cvh = vh + (isMobile ? 140 : 0);
       canvas.width = vw * DPR;
-      canvas.height = vh * DPR;
+      canvas.height = cvh * DPR;
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
       buildParticles();
+      lastW = vw; lastH = vh;
     }
     resize();
     buildAtlas();
-    window.addEventListener('resize', function () { resize(); });
+    /* re-sync once after the viewport settles (some mobile browsers report a
+       different innerWidth just after load) */
+    setTimeout(resize, 450);
+    /* The pulsing bug: mobile browsers fire resize on every URL-bar show/hide,
+       which changes only innerHeight. On touch widths we rebuild ONLY on a large
+       width change (orientation) — URL-bar jitter never moves the width, so the
+       canvas and header stop pulsing. Desktop stays fully responsive. */
+    window.addEventListener('resize', function () {
+      var w = window.innerWidth, h = window.innerHeight;
+      var significant = (w < 1024)
+        ? Math.abs(w - lastW) > 120
+        : (Math.abs(w - lastW) > 24 || Math.abs(h - lastH) > 24);
+      if (!significant) return;
+      clearTimeout(resizeT);
+      resizeT = setTimeout(resize, 200);
+    });
 
     var lastTs = 0;
     var running = true;
@@ -663,7 +685,7 @@
       var seg = segmentAt(window.scrollY + vh * 0.5);
       var fA = seg[0], fB = seg[1], segP = seg[2];
 
-      ctx.clearRect(0, 0, vw, vh);
+      ctx.clearRect(0, 0, vw, cvh || vh);
       drawNebulae(t);
       drawGrid(t);
 
