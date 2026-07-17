@@ -1,0 +1,27 @@
+# Keep production lean — these stay in the repo but never deploy.
+# Nothing here is referenced by index.html / style.css / main.js.
+
+# Brand master archive + internal design docs (should not be public)
+VITA_COMEX_logos+brand-reference.zip
+VITA_COMEX_brand-reference.md
+CONTEXT.md
+COPY.md
+DESIGN.md
+DESIGN(1).md
+DESIGN(2).md
+DESIGN(3).md
+DESIGN(4).md
+DESIGN(Example).md
+DESIGN(Example) Screenshots/
+
+# Print-resolution logo masters (~9 MB, web uses the *_web / *_white SVGs)
+logos/**/*_PRINT.svg
+
+# Unused logo variants (site references only the white / color-on-dark set)
+logos/**/*_black*.svg
+logos/**/*_gray*.svg
+logos/**/*-alt.svg
+
+# Leftover from an earlier globe approach — replaced by the custom canvas engine
+assets/vendor/
+assets/img/cities/
