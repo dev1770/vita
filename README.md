@@ -24,7 +24,7 @@ Abrí <http://localhost:8321>. Editás los archivos y refrescás el navegador (C
 
 ```
 index.html            Página principal (one-page: Inicio, Nosotros, Marcas, Contacto)
-privacidad.html       Política de privacidad
+privacypolicy.html    Política de privacidad (bilingüe, indexable) — ruta /privacypolicy
 assets/
   css/style.css       Sistema de diseño completo
   js/main.js          Motor del planeta de partículas + i18n + wizard de contacto

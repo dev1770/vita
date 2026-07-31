@@ -4,6 +4,10 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/privacidad", "destination": "/privacypolicy", "permanent": true },
+    { "source": "/privacidad.html", "destination": "/privacypolicy", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/logos/(.*)",

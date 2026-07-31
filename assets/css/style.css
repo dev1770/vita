@@ -917,9 +917,44 @@ html.js .reveal-line > span {
 }
 html.js .reveal-line.is-visible > span { transform: none; }
 
-/* ---- Page head (privacidad) ---- */
+/* ---- Page head (legal) ---- */
 .page-head { padding-block: 180px 0; }
 .page-head .eyebrow { margin-bottom: 16px; }
+
+/* ---- Legal prose (privacy policy) ---- */
+.legal { max-width: 68ch; margin-inline: auto; text-align: left; }
+.legal__updated {
+  color: var(--color-ash);
+  font-size: var(--text-nav);
+  letter-spacing: var(--tracking-nav);
+  margin-bottom: 48px;
+}
+.legal h2 {
+  font-size: var(--text-subheading);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.25;
+  color: var(--color-white);
+  margin: 52px 0 18px;
+}
+.legal h2:first-of-type { margin-top: 0; }
+.legal p { color: var(--color-silver); line-height: 1.75; margin-bottom: 18px; }
+.legal ul { color: var(--color-silver); line-height: 1.75; margin: 0 0 18px; padding-left: 22px; }
+.legal li { list-style: disc; margin-bottom: 10px; }
+.legal a { color: var(--color-teal-text); }
+.legal a:hover { text-decoration: underline; }
+.legal strong { color: var(--color-white); font-weight: 600; }
+
+/* ---- Footer contact list (brand-labeled) ---- */
+.footer__contact { margin-bottom: 16px; }
+.footer__contact:last-child { margin-bottom: 0; }
+.footer__contact .footer__contact-label {
+  display: block;
+  color: var(--color-ash);
+  font-size: var(--text-caption);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
 
 /* ==========================================================================
    Responsive

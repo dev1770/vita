@@ -24,6 +24,10 @@
       if (el.dataset.es === undefined) el.dataset.es = el.textContent;
       el.textContent = isEN ? el.dataset.en : el.dataset.es;
     });
+    document.querySelectorAll('[data-en-html]').forEach(function (el) {
+      if (el.dataset.esHtml === undefined) el.dataset.esHtml = el.innerHTML;
+      el.innerHTML = isEN ? el.dataset.enHtml : el.dataset.esHtml;
+    });
     document.querySelectorAll('[data-en-placeholder]').forEach(function (el) {
       if (el.dataset.esPlaceholder === undefined) el.dataset.esPlaceholder = el.getAttribute('placeholder') || '';
       el.setAttribute('placeholder', isEN ? el.dataset.enPlaceholder : el.dataset.esPlaceholder);
