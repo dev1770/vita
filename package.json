@@ -1,0 +1,9 @@
+{
+  "name": "vita-comex",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vita Comex — static site + contact/email relay serverless function.",
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}

@@ -81,6 +81,8 @@
           </div>
         </div>
       </div>
+      <!-- Overlay CTA floating over the hero planet; scrolls to the China section -->
+      <a class="btn btn--china hero__china" href="#mision-china" data-en="Mission to China 2026">Misión a China 2026</a>
       <div class="hero-hint" aria-hidden="true"></div>
     </section>
 
@@ -318,6 +320,11 @@
               <h3 class="wizard__question" data-en="Where can we reach you?">¿Dónde te contactamos?</h3>
               <form class="wizard__form" novalidate>
                 <div class="field">
+                  <label for="wz-name" data-en="Name (required)">Nombre (obligatorio)</label>
+                  <input type="text" id="wz-name" placeholder="Tu nombre" data-en-placeholder="Your name" autocomplete="name" required>
+                  <span class="field-error" data-en="Please enter your name.">Ingresa tu nombre.</span>
+                </div>
+                <div class="field">
                   <label for="wz-email" data-en="Email (required)">Email (obligatorio)</label>
                   <input type="email" id="wz-email" placeholder="tu@empresa.com" data-en-placeholder="you@company.com" autocomplete="email" required>
                   <span class="field-error" data-en="Enter a valid email so we can get back to you.">Ingresa un email válido para que podamos responderte.</span>
@@ -335,6 +342,48 @@
             <!-- Result -->
             <div class="wizard__result" hidden>
               <p class="subheading" data-en="We received your inquiry. We'll get back to you shortly.">Recibimos tu consulta. Te responderemos a la brevedad.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- planet stays sparse into the China mission -->
+    <div class="cosmos-gap cosmos-gap--short" data-formation="sparse" aria-hidden="true"></div>
+
+    <!-- ===================== MISIÓN A CHINA 2026 — simplified contact ===================== -->
+    <section class="section" id="mision-china" data-formation="sparse">
+      <div class="container">
+        <div class="section-rule" style="margin-bottom: clamp(64px, 10vh, 120px);"></div>
+        <div class="section-header section-header--center text-shield" data-stagger>
+          <span class="eyebrow reveal" data-en="Trade mission">Misión comercial</span>
+          <h2 class="display reveal-line"><span data-en="Canton Fair 2026">Feria de Cantón 2026</span></h2>
+          <p class="section-intro reveal" data-en="Last spots available. Want to know more? Leave your info and we'll get in touch.">Últimos cupos disponibles. Si quieres saber más, completa tu info y te contactamos.</p>
+        </div>
+
+        <div class="wizard-wrap reveal text-shield">
+          <div class="china-form glass">
+            <form class="china-form__form" novalidate>
+              <div class="field">
+                <label for="cn-name" data-en="Name (required)">Nombre (obligatorio)</label>
+                <input type="text" id="cn-name" placeholder="Tu nombre" data-en-placeholder="Your name" autocomplete="name" required>
+                <span class="field-error" data-en="Please enter your name.">Ingresa tu nombre.</span>
+              </div>
+              <div class="field">
+                <label for="cn-email" data-en="Email (required)">Email (obligatorio)</label>
+                <input type="email" id="cn-email" placeholder="tu@empresa.com" data-en-placeholder="you@company.com" autocomplete="email" required>
+                <span class="field-error" data-en="Enter a valid email so we can get back to you.">Ingresa un email válido para que podamos responderte.</span>
+              </div>
+              <div class="field">
+                <label for="cn-phone" data-en="Phone (optional)">Teléfono (opcional)</label>
+                <input type="tel" id="cn-phone" placeholder="+…" autocomplete="tel">
+              </div>
+              <div class="china-form__submit">
+                <button class="btn btn--china" type="submit" data-en="Send">Enviar</button>
+              </div>
+            </form>
+            <div class="china-form__result" hidden>
+              <p class="subheading" data-en="We received your interest in the Canton Fair 2026. We'll get back to you shortly.">Recibimos tu interés en la Feria de Cantón 2026. Te responderemos a la brevedad.</p>
             </div>
           </div>
         </div>

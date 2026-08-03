@@ -773,6 +773,58 @@
   window.addEventListener('resize', onScroll);
   onScroll();
 
+  /* ---------------- Lead delivery (both forms → /api/contact) ---------------- */
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function sendLead(payload) {
+    return fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (r) { return r.ok; }).catch(function () { return false; });
+  }
+
+  /* ---------------- Misión a China: simplified contact ---------------- */
+  (function () {
+    var card = document.querySelector('.china-form');
+    if (!card) return;
+    var form = card.querySelector('.china-form__form');
+    var result = card.querySelector('.china-form__result');
+    var sendBtn = form ? form.querySelector('button[type="submit"]') : null;
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nameField = form.querySelector('#cn-name');
+      var emailField = form.querySelector('#cn-email');
+      var nameOk = !!nameField.value.trim();
+      var emailOk = EMAIL_RE.test(emailField.value.trim());
+      nameField.closest('.field').classList.toggle('has-error', !nameOk);
+      emailField.closest('.field').classList.toggle('has-error', !emailOk);
+      if (!nameOk) { nameField.focus(); return; }
+      if (!emailOk) { emailField.focus(); return; }
+
+      var payload = {
+        source: 'china',
+        necesidad: 'Feria de Cantón 2026',
+        name: nameField.value.trim(),
+        email: emailField.value.trim()
+      };
+      var phone = form.querySelector('#cn-phone').value.trim();
+      if (phone) payload.phone = phone;
+
+      if (sendBtn) sendBtn.disabled = true;
+      sendLead(payload).then(function (ok) {
+        if (ok) {
+          form.hidden = true;
+          if (result) result.hidden = false;
+        } else if (sendBtn) {
+          sendBtn.disabled = false;
+        }
+      });
+    });
+  })();
+
   /* ---------------- Contact wizard ---------------- */
   var wizard = document.querySelector('.wizard');
   if (!wizard) return;
@@ -852,18 +904,22 @@
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      var nameField = form.querySelector('#wz-name');
       var emailField = form.querySelector('#wz-email');
-      var emailWrap = emailField.closest('.field');
-      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailField.value.trim());
-      emailWrap.classList.toggle('has-error', !valid);
-      if (!valid) { emailField.focus(); return; }
+      var nameOk = !!nameField.value.trim();
+      var emailOk = EMAIL_RE.test(emailField.value.trim());
+      nameField.closest('.field').classList.toggle('has-error', !nameOk);
+      emailField.closest('.field').classList.toggle('has-error', !emailOk);
+      if (!nameOk) { nameField.focus(); return; }
+      if (!emailOk) { emailField.focus(); return; }
 
+      answers.source = 'contacto';
+      answers.name = nameField.value.trim();
       answers.email = emailField.value.trim();
       var phone = form.querySelector('#wz-phone').value.trim();
       if (phone) answers.phone = phone;
 
-      /* [PLACEHOLDER: destino del formulario — email/CRM]
-         Wire `answers` to the client-provided endpoint here. */
+      sendLead(answers);
 
       steps.forEach(function (s) { s.classList.remove('is-active'); });
       if (backBtn) backBtn.hidden = true;

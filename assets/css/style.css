@@ -255,6 +255,35 @@ p { font-weight: 200; }
 }
 .btn:active { transform: none; }
 
+/* China promo: softened orange→orange-red variant of the primary pill.
+   Muted tones (not neon) + text-shadow keep white lettering high-contrast;
+   a slow light sweep loops across for a "limited time" highlight. */
+.btn--china {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #e07f3f 0%, #c74a30 120%);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(90, 20, 5, 0.5);
+  box-shadow: 0 6px 26px rgba(190, 70, 40, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+.btn--china:hover {
+  box-shadow: 0 12px 40px rgba(190, 70, 40, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+/* looped highlight sweep */
+.btn--china::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.5) 50%, transparent 70%);
+  transform: translateX(-130%);
+  animation: china-sheen 3.6s var(--ease-premium) infinite;
+  pointer-events: none;
+}
+@keyframes china-sheen {
+  0%      { transform: translateX(-130%); }
+  55%, 100% { transform: translateX(130%); }
+}
+
 /* Secondary: bare ghost text link */
 .btn-ghost {
   display: inline-flex;
@@ -454,6 +483,7 @@ html.js .section-rule.is-visible { transform: scaleX(1); transition: transform 1
 
 /* ---- Hero ---- */
 .hero {
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -479,6 +509,31 @@ html.js .section-rule.is-visible { transform: scaleX(1); transition: transform 1
 .m-dot { display: inline; }
 .hero__sub-more { display: none; }
 .hero__ctas { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+
+/* MISIÓN A CHINA 2026 — overlay CTA floating over the hero planet.
+   Desktop: centered over the planet, to the right of the title.
+   Mobile (≤1023px, below): centered in the planet band above the title. */
+.hero__china {
+  position: absolute;
+  z-index: 3;
+  left: 66%;               /* over the planet's true center (main.js cx = vw*0.66) */
+  top: 55%;                /* aligns with the planet center (cy = vh*0.55) */
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-size: 16px;
+  padding: 18px 44px;
+  min-height: 56px;
+}
+/* hover lift must preserve the centering transform (base .btn:hover would clobber it) */
+.hero__china:hover { transform: translate(-50%, calc(-50% - 2px)); }
+.hero__china:active { transform: translate(-50%, -50%); }
+/* fades in with the hero — opacity only, so the centering transform is preserved */
+html.js .hero__china { opacity: 0; }
+html.js.is-loaded .hero__china {
+  opacity: 1;
+  transition: opacity 1100ms var(--ease-premium);
+  transition-delay: 680ms;
+}
 
 /* staged entrance */
 html.js .hero .eyebrow,
@@ -856,6 +911,13 @@ html.js.is-loaded .hero__ctas { transition-delay: 560ms; }
 .wizard__result[hidden] { display: none; }
 .wizard__result p { color: var(--color-white); }
 
+/* China mission: compact form card — reuses .field / .glass */
+.china-form { padding: clamp(28px, 4vw, 48px); }
+.china-form__submit { text-align: center; margin-top: 12px; }
+.china-form__result { text-align: center; padding-block: 40px; }
+.china-form__result[hidden] { display: none; }
+.china-form__result p { color: var(--color-white); }
+
 /* ---- Footer: floats, minimal ---- */
 .footer {
   padding-block: 96px 48px;
@@ -963,6 +1025,18 @@ html.js .reveal-line.is-visible > span { transform: none; }
   .hero__copy { max-width: 100%; }
   /* planet owns the top of the viewport as the focal element; copy below */
   .hero { padding-top: 50vh; }
+  /* button rides the planet band, centered above the title (size unchanged) */
+  .hero__china {
+    left: 50%;
+    right: auto;
+    top: clamp(96px, 26vh, 260px);
+    transform: translateX(-50%);
+    font-size: var(--text-nav);
+    padding: 13px 26px;
+    min-height: 46px;
+  }
+  .hero__china:hover,
+  .hero__china:active { transform: translateX(-50%); }
   .cosmos-gap { height: 14vh; }
   .cosmos-gap--short { height: 8vh; }
 }
@@ -1018,6 +1092,8 @@ html.js .reveal-line.is-visible > span { transform: none; }
     transform: none !important;
     transition: none !important;
   }
+  /* opacity-only reset — must not clear the centering transform */
+  html.js .hero__china { opacity: 1 !important; transition: none !important; }
   .wizard__step.is-active { animation: none; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
